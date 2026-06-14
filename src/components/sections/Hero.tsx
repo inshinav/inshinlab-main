@@ -89,8 +89,7 @@ export function Hero() {
             variants={fadeUpItem}
             className="mt-5 font-mono text-xs tracking-wide text-faint sm:text-sm"
           >
-            Яндекс&nbsp;Go · Яндекс&nbsp;(шеринг) · Ясно&nbsp;—&nbsp;
-            <span className="text-muted">сейчас</span>
+            Яндекс&nbsp;Go · Яндекс&nbsp;Драйв · Самокаты · Прокат · Бери&nbsp;Заряд
           </motion.p>
 
           <motion.div variants={fadeUpItem} className="mt-9 flex flex-wrap items-center gap-3">

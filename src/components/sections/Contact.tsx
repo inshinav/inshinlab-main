@@ -59,7 +59,7 @@ export function Contact() {
             variants={fadeUpItem}
             className="mt-7 font-mono text-xs text-faint sm:text-[13px]"
           >
-            Формат: remote / гибрид / релокация · Локация: {SITE.location}
+            Формат: remote / гибрид / офис · готов к переезду и командировкам
           </motion.p>
         </div>
       </motion.div>
