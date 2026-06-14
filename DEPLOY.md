@@ -17,16 +17,25 @@ npm run build
 # артефакт: dist/  (index.html, assets/, favicon.svg, og.png — пути root-absolute /assets/...)
 ```
 
-## 2. Заливка на сервер (scp контента dist в корень)
+## 2. Заливка на сервер (snести apex-assets → залить заново)
+
+> ⚠️ ГЛАВНАЯ ГОТЧА: `scp -r dist/assets …` при УЖЕ существующей папке `assets` на
+> сервере кладёт её ВНУТРЬ → `/var/www/html/assets/assets/…`, и index.html ловит 404
+> на `/assets/…` → белый экран. Поэтому КАЖДЫЙ раз сначала сносим apex-папку `assets`
+> (только её — под-сайты `/yasno/` и т.п. лежат отдельными папками и не затрагиваются),
+> затем заливаем заново.
 
 ```bash
-# cd + относительный путь — иначе scp примет "C:" за хост.
+# 1) снести старую apex-папку assets (БЕЗОПАСНО: только apex, не под-сайты)
+ssh root@inshinlab.com "rm -rf /var/www/html/assets"
+
+# 2) залить заново (cd + относительный путь — иначе scp примет "C:" за хост)
 cd /c/Users/Alex/inshin-lab
-scp -r dist/* root@inshinlab.com:/var/www/html/
+scp -r dist/index.html dist/assets dist/favicon.svg dist/og.png root@inshinlab.com:/var/www/html/
 ```
 
-> Важно: именно `dist/*` (контент), чтобы файлы легли в корень. НЕ `scp -r dist ...`
-> (создаст `/var/www/html/dist/`). И никаких `rm -rf /var/www/html/*` — там живут под-сайты.
+> Файлы (index.html, favicon.svg, og.png) перезаписываются нормально — вложенность
+> бывает только у папок, поэтому достаточно сносить `assets`. Никаких `rm -rf /var/www/html/*`.
 
 ## 3. Права (scp кладёт под root → www-data ловит 403)
 
