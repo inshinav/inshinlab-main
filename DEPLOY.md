@@ -22,7 +22,7 @@ npm run build
 ```bash
 # cd + относительный путь — иначе scp примет "C:" за хост.
 cd /c/Users/Alex/inshin-lab
-scp -r dist/* root@kewvvegxjv:/var/www/html/
+scp -r dist/* root@inshinlab.com:/var/www/html/
 ```
 
 > Важно: именно `dist/*` (контент), чтобы файлы легли в корень. НЕ `scp -r dist ...`
@@ -31,7 +31,7 @@ scp -r dist/* root@kewvvegxjv:/var/www/html/
 ## 3. Права (scp кладёт под root → www-data ловит 403)
 
 ```bash
-ssh root@kewvvegxjv "chmod -R a+rX /var/www/html/index.html /var/www/html/assets /var/www/html/favicon.svg /var/www/html/og.png"
+ssh root@inshinlab.com "chmod -R a+rX /var/www/html/index.html /var/www/html/assets /var/www/html/favicon.svg /var/www/html/og.png"
 ```
 
 ## 4. nginx — изменений НЕ требуется
